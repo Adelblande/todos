@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
-import * as todoActions from './actions/todoAction'
 import { connect } from 'react-redux';
+import * as todoActions from './actions/todoAction';
+
 
 class TodoList extends Component {
   constructor(props){
@@ -9,22 +10,45 @@ class TodoList extends Component {
 
     console.log(props)
   }
+  
+  state = {
+    newTodoTexto: ''
+  }
+
+  addNewTodo = () => {
+    this.props.addTodo(this.state.newTodoTexto);
+    this.setState({ newTodoTexto: '' });
+  }
+
   render(){
     return (
       <div>
         <ul>
-          <li> Lista de todos</li>
+          {
+            this.props.todos.map(todo => (
+              <li key={todo.id}>{ todo.texto }</li>
+            ))
+          }
         </ul>
 
-        <input type="text" />
-        <button>Add Todo</button>
+        <input 
+          type="text" 
+          value={this.state.newTodoTexto} 
+          onChange={(e) => this.setState({ newTodoTexto: e.target.value})}
+        />
+        
+        <button onClick={this.addNewTodo}>Add Todo</button>
+
       </div>
     )
   }
 }
 
+const mapStateToProps = state => ({
+  todos: state.todos
+})
 const mapDispatchToProps = dispatch => bindActionCreators(todoActions, dispatch);
 
 
 
-export default connect(null, mapDispatchToProps)(TodoList);
+export default connect(mapStateToProps, mapDispatchToProps)(TodoList);
