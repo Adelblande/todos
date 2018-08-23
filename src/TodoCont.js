@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 const TodoCont = (props) => (
-  <h2>Voce tem { props.todos.length } todos</h2>
+  <h2>Total de Tarefas: { props.todos.length } </h2>
 )
 
 const mapStateToProps = state => ({

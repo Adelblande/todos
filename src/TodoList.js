@@ -37,7 +37,7 @@ class TodoList extends Component {
           onChange={(e) => this.setState({ newTodoTexto: e.target.value})}
         />
         
-        <button onClick={this.addNewTodo}>Add Todo</button>
+        <button onClick={this.addNewTodo}>Add Tarefa</button>
 
       </div>
     )
